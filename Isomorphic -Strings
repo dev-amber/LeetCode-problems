@@ -1,0 +1,32 @@
+class solution{
+public:
+bool isIsomorphic(string s, string t){
+if(s.size()!=t.size(){
+return false;
+}
+std::unorderd_map<char,char> mapStoT;
+std::unorderd_map<char,char> mapTtoS;
+for(size_t i=0;i<s.size;i++){
+char charS=s[i];
+char charT=t[i];
+if(mapStoT.find()!=mapStoT.end()){
+if(mapStoT[charS] != charT) {
+                return false;
+            }
+ } else {
+            mapStoT[charS] = charT;
+        }
+ if (mapTtoS.find(charT) != mapTtoS.end()) {
+            if (mapTtoS[charT] != charS) {
+                return false; // Inconsistent mapping
+            }
+        } else {
+            mapTtoS[charT] = charS;
+        }
+    }
+
+    return true;
+}
+
+};
+
