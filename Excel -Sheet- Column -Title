@@ -1,0 +1,16 @@
+class solution{
+public:
+string convertToTitle(int columnNumber) {
+string result;
+while(columnNumber>0){
+columnNumber --;
+char currentchar='A' + (columnNumber % 26);
+result+=currentchar;
+columnNumber/=26;
+}
+reverse(result.begin(),result.end());
+return result;
+}
+};
+
+
