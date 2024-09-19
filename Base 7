@@ -1,0 +1,27 @@
+class Solution {
+public:
+    string convertToBase7(int num) {
+        if (num == 0) return "0";
+
+        // Determine if the number is negative
+        bool isNegative = num < 0;
+        num = abs(num); // Convert the number to positive if negative
+
+        // Use a string to store the result
+        string result = "";
+
+        // Convert to base 7
+        while (num > 0) {
+            int remainder = num % 7;
+            result = to_string(remainder) + result; // Append remainder to the front
+            num /= 7;
+        }
+
+        // Add the negative sign if necessary
+        if (isNegative) {
+            result = "-" + result;
+        }
+
+        return result;
+    }
+};
