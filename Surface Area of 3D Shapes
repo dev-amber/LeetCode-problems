@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int surfaceArea(vector<vector<int>>& grid) {
+       int n = grid.size();
+        int totalSurfaceArea = 0;
+        
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (grid[i][j] > 0) {
+                    // Add the surface area of the current tower (6 faces per cube)
+                    totalSurfaceArea += 6 * grid[i][j];
+                    
+                    // Subtract the surface area of cubes glued together in the same stack (tower)
+                    totalSurfaceArea -= 2 * (grid[i][j] - 1);
+                    
+                    // Subtract the surface area of cubes glued to the left (if any)
+                    if (i > 0) {
+                        totalSurfaceArea -= 2 * min(grid[i][j], grid[i - 1][j]);
+                    }
+                    
+                    // Subtract the surface area of cubes glued to the top (if any)
+                    if (j > 0) {
+                        totalSurfaceArea -= 2 * min(grid[i][j], grid[i][j - 1]);
+                    }
+                }
+            }
+        }
+        
+        return totalSurfaceArea;
+    }
+}; 
+
