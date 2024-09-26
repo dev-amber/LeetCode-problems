@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool lemonadeChange(vector<int>& bills) {
+        int five = 0, ten = 0; // Counters for $5 and $10 bills
+        
+        for (int bill : bills) {
+            if (bill == 5) {
+                five++; // No change needed, just take the $5 bill
+            } 
+            else if (bill == 10) {
+                if (five > 0) { // Give $5 change
+                    five--;
+                    ten++;
+                } else {
+                    return false; // Can't give correct change
+                }
+            } 
+            else { // bill == 20
+                if (ten > 0 && five > 0) { // Best case: give one $10 and one $5 as change
+                    ten--;
+                    five--;
+                } 
+                else if (five >= 3) { // Otherwise, give three $5 bills as change
+                    five -= 3;
+                } 
+                else {
+                    return false; // Can't give correct change
+                }
+            }
+        }
+        return true;
+    }
+};
