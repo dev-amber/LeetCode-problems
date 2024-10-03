@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+          unordered_set<char> row1 = {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'};
+    unordered_set<char> row2 = {'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'};
+    unordered_set<char> row3 = {'z', 'x', 'c', 'v', 'b', 'n', 'm'};
+    
+    vector<string> result;
+
+    // Helper function to determine which row a character belongs to
+    auto getRow = [&](char c) {
+        c = tolower(c); // Convert character to lowercase
+        if (row1.count(c)) return 1;
+        if (row2.count(c)) return 2;
+        if (row3.count(c)) return 3;
+        return 0;
+    };
+
+    // Loop through each word in the input
+    for (const string& word : words) {
+        int row = getRow(word[0]); // Get the row of the first character
+        bool isValid = true;
+
+        // Check if all characters belong to the same row
+        for (char c : word) {
+            if (getRow(c) != row) {
+                isValid = false;
+                break;
+            }
+        }
+
+        // If valid, add the word to the result
+        if (isValid) {
+            result.push_back(word);
+        }
+    }
+
+    return result;
+    }
+};
