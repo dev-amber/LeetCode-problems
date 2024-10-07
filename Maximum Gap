@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int maximumGap(vector<int>& nums) {
+        if (nums.size() < 2) return 0;
+
+    int min_val = *min_element(nums.begin(), nums.end());
+    int max_val = *max_element(nums.begin(), nums.end());
+    if (min_val == max_val) return 0; 
+
+    int n = nums.size();
+    int bucket_size = std::max(1, (max_val - min_val) / (n - 1)); 
+    int bucket_count = (max_val - min_val) / bucket_size + 1;
+
+    std::vector<int> min_bucket(bucket_count, INT_MAX); 
+    std::vector<int> max_bucket(bucket_count, INT_MIN); 
+
+   
+    for (int num : nums) {
+        int bucket_idx = (num - min_val) / bucket_size;
+        min_bucket[bucket_idx] = std::min(min_bucket[bucket_idx], num);
+        max_bucket[bucket_idx] = std::max(max_bucket[bucket_idx], num);
+    }
+
+   
+    int max_gap = 0;
+    int previous_max = min_val;
+
+    for (int i = 0; i < bucket_count; i++) {
+        if (min_bucket[i] == INT_MAX) continue; 
+
+        max_gap = std::max(max_gap, min_bucket[i] - previous_max);
+        previous_max = max_bucket[i];
+    }
+
+    return max_gap;
+    }
+};
