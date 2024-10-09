@@ -1,0 +1,20 @@
+solution{
+public:
+if (timeSeries.empty()) return 0;
+
+    int totalPoisonedTime = 0;
+
+    for (int i = 0; i < timeSeries.size() - 1; ++i) {
+        // Calculate the time difference between current and next attack
+        int timeDifference = timeSeries[i + 1] - timeSeries[i];
+        
+        // Add the minimum of timeDifference and duration to the total
+        totalPoisonedTime += min(timeDifference, duration);
+    }
+
+    // Add the full duration for the last attack
+    totalPoisonedTime += duration;
+
+    return totalPoisonedTime;
+}
+};
