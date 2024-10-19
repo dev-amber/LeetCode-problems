@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> findDisappearedNumbers(vector<int>& nums) {
+        int n = nums.size();
+    
+    // Marking presence of numbers
+    for (int i = 0; i < n; ++i) {
+        int index = abs(nums[i]) - 1; // Get the index for the current number
+        if (nums[index] > 0) {
+            nums[index] = -nums[index]; // Negate the value to mark it as seen
+        }
+    }
+    
+    // Collecting missing numbers
+    std::vector<int> missingNumbers;
+    for (int i = 0; i < n; ++i) {
+        if (nums[i] > 0) { // If the value is still positive, it was never marked
+            missingNumbers.push_back(i + 1); // Add the missing number (i + 1)
+        }
+    }
+     return missingNumbers;
+    }
+};
