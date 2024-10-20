@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int calPoints(vector<string>& operations) {
+        stack<int> scores;  // Stack to keep the valid scores
+        for (const string& op : operations) {
+            if (op == "C") {
+                // Invalidate the last score
+                if (!scores.empty()) {
+                    scores.pop();
+                }
+            } else if (op == "D") {
+                // Double the last score
+                if (!scores.empty()) {
+                    scores.push(scores.top() * 2);
+                }
+            } else if (op == "+") {
+                // Sum the last two scores
+                if (scores.size() >= 2) {
+                    int top1 = scores.top();
+                    scores.pop();
+                    int top2 = scores.top();
+                    scores.push(top1); // Push back the first top
+                    scores.push(top1 + top2); // Push the sum
+                }
+            } else {
+                // Convert string to integer and push to the stack
+                scores.push(stoi(op));
+            }
+        }
+        
+        // Calculate the sum of all valid scores
+        int total = 0;
+        while (!scores.empty()) {
+            total += scores.top();
+            scores.pop();
+        }
+        
+        return total; 
+    }
+};
