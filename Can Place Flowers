@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+         int count = 0; // Counter for new flowers that can be planted
+    int size = flowerbed.size();
+
+    for (int i = 0; i < size; i++) {
+        // Check if the current plot is empty and adjacent plots are also empty or out of bounds
+        if (flowerbed[i] == 0 &&
+            (i == 0 || flowerbed[i - 1] == 0) && // Check left plot or out of bounds
+            (i == size - 1 || flowerbed[i + 1] == 0)) { // Check right plot or out of bounds
+            
+            flowerbed[i] = 1; // Plant a flower
+            count++; // Increment the count of planted flowers
+            
+            // If we have planted enough flowers, return true
+            if (count >= n) {
+                return true;
+            }
+        }
+    }
+    
+    // After checking all plots, see if we have enough planted flowers
+    return count >= n;
+    }
+};
