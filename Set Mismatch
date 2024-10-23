@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+     int n = nums.size();
+    
+    // Calculate expected sum and sum of squares for numbers from 1 to n
+    long long sum_n = (long long)n * (n + 1) / 2;
+    long long sum_n_square = (long long)n * (n + 1) * (2 * n + 1) / 6;
+    
+    // Calculate actual sum and sum of squares from the given array
+    long long sum_nums = 0, sum_nums_square = 0;
+    for (int num : nums) {
+        sum_nums += num;
+        sum_nums_square += (long long)num * num;  // Ensure multiplication is in long long
+    }
+    
+    // Calculate differences
+    long long diff = sum_nums - sum_n;  // y - x
+    long long square_diff = sum_nums_square - sum_n_square;  // y^2 - x^2
+    
+    // (y - x) * (y + x) = y^2 - x^2
+    long long sum_y_x = square_diff / diff;  // y + x
+    
+    int y = (sum_y_x + diff) / 2;
+    int x = sum_y_x - y;
+    
+    return {y, x};
+    }
+};
