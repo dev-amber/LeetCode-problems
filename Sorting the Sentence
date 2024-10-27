@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string sortSentence(string s) {
+        std::istringstream iss(s);
+    std::string word;
+    std::vector<std::string> original(9, ""); // Up to 9 words
+
+    while (iss >> word) {
+        // Extract the last character as the index
+        int index = word.back() - '1'; // Convert char to 0-indexed position
+        word.pop_back(); // Remove the last character (position number)
+        original[index] = word; // Place the word in the correct position
+    }
+
+    // Construct the result by joining words in the original order
+    std::string result;
+    for (const auto &w : original) {
+        if (!w.empty()) { // Avoid extra empty slots
+            if (!result.empty()) result += " "; // Add space between words
+            result += w;
+        }
+    }
+    return result; 
+    }
+};
