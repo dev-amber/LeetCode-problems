@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int smallestRangeI(vector<int>& nums, int k) {
+        int minVal = *std::min_element(nums.begin(), nums.end());
+    int maxVal = *std::max_element(nums.begin(), nums.end());
+
+    int newMin = minVal + k;
+    int newMax = maxVal - k;
+    
+  
+    return std::max(0, newMax - newMin);
+    }
+};
