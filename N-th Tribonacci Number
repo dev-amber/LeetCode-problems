@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int tribonacci(int n) {
+if(n==0) return 0;
+if(n==1 || n==2) return 1;
+int Tn_3=0;
+int Tn_2=1;
+int Tn_1=1;
+int Tn=0;
+ for (int i = 3; i <= n; ++i) {
+            Tn = Tn_3 + Tn_2 + Tn_1; // Calculate Tn
+            // Update for next iteration
+            Tn_3 = Tn_2;
+            Tn_2 = Tn_1;
+            Tn_1 = Tn;
+        }
+
+        return Tn;
+    }
+};
