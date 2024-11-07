@@ -1,0 +1,20 @@
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    string maximumOddBinaryNumber(string s) {
+        int countOnes = 0, countZeros = 0;
+        for (char ch : s) {
+            if (ch == '1') countOnes++;
+            else countZeros++;
+        }
+
+        // Build the maximum odd binary number
+        string result(countOnes - 1, '1');  
+        result.append(countZeros, '0');     
+        result += '1';                      
+
+        return result;
+    }
+};
