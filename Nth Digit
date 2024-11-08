@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int findNthDigit(int n) {
+        long long digitLength = 1;   // The current digit length (1 for [1-9], 2 for [10-99], etc.)
+        long long count = 9;         // The count of digits contributed by the current range
+        long long start = 1;         // The starting number of the current range (1, 10, 100, ...)
+
+        // Step 1: Identify the range that contains the nth digit
+        while (n > digitLength * count) {
+            n -= digitLength * count; // Deduct digits in this range
+            digitLength++;            // Move to the next digit length
+            count *= 10;              // Count of numbers grows (9, 90, 900, ...)
+            start *= 10;              // Starting number grows (1, 10, 100, ...)
+        }
+
+        // Step 2: Identify the exact number within this range that contains the nth digit
+        start += (n - 1) / digitLength;  // Get the number containing the nth digit
+        std::string number = std::to_string(start); // Convert the number to string for easy indexing
+
+        // Step 3: Identify the exact digit within the number
+        return number[(n - 1) % digitLength] - '0';
+    }
+};
