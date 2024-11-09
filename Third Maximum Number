@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+            std::set<int> top3;
+
+        for (int num : nums) {
+            top3.insert(num);       // Insert number into the set
+            if (top3.size() > 3) {  // Maintain only the top 3 distinct numbers
+                top3.erase(top3.begin());  // Erase the smallest element
+            }
+        }
+
+      
+        return (top3.size() == 3) ? *top3.begin() : *top3.rbegin();
+    }
+};
