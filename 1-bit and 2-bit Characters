@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool isOneBitCharacter(vector<int>& bits) {
+        int n = bits.size();
+        int i = 0;
+
+        while (i < n - 1) {  // Loop until the second last element
+            if (bits[i] == 1) {
+                i += 2;       // Move two steps for a two-bit character
+            } else {
+                i += 1;       // Move one step for a one-bit character
+            }
+        }
+        return i == n - 1;
+    }
+};
