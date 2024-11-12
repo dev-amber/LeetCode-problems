@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int leastBricks(vector<vector<int>>& wall) {
+       unordered_map<int, int> edgeCount;
+    int maxEdges = 0;
+
+    // Traverse each row in the wall
+    for (const auto& row : wall) {
+        int position = 0;
+
+        // Calculate edge positions for each brick in the row except the last one
+        for (int i = 0; i < row.size() - 1; ++i) {
+            position += row[i];
+            edgeCount[position]++;
+            maxEdges = max(maxEdges, edgeCount[position]);
+        }
+    }
+
+    // Minimum bricks crossed = total rows - maximum edges at any position
+    return wall.size() - maxEdges; 
+    }
+};
