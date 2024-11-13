@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+     if (n == 1 && trust.empty()) return 1;
+    
+        vector<int> trustCount(n + 1, 0);      // Tracks how many people trust this person
+        vector<bool> trustedByOthers(n + 1, false); // Tracks if this person trusts someone else
+    
+        for (auto& t : trust) {
+            int a = t[0];
+            int b = t[1];
+            trustCount[b]++;              // b is trusted by a, so increment trust count for b
+            trustedByOthers[a] = true;    // a trusts someone, mark them as not a potential judge
+        }
+    
+      
+        for (int i = 1; i <= n; i++) {
+            if (!trustedByOthers[i] && trustCount[i] == n - 1) {
+                return i; // Found the judge
+            }
+        }
+        
+        return -1; // No judge found
+    
+    }
+};
