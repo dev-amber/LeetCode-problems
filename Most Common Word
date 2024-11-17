@@ -1,0 +1,31 @@
+string mostCommonWord(string paragraph, vector<string>& banned) {
+    // Convert paragraph to lowercase and replace non-alphanumeric characters with spaces
+    for (char& c : paragraph) {
+        c = isalpha(c) ? tolower(c) : ' ';
+    }
+
+    // Insert banned words into a set
+    unordered_set<string> bannedSet(banned.begin(), banned.end());
+
+    // Count the frequency of each word
+    unordered_map<string, int> wordCount;
+    string word;
+    stringstream ss(paragraph);
+    while (ss >> word) {
+        if (!bannedSet.count(word)) { // Only consider non-banned words
+            wordCount[word]++;
+        }
+    }
+
+    // Find the most frequent word
+    string mostCommon;
+    int maxFreq = 0;
+    for (const auto& [key, value] : wordCount) {
+        if (value > maxFreq) {
+            mostCommon = key;
+            maxFreq = value;
+        }
+    }
+
+    return mostCommon;
+}
