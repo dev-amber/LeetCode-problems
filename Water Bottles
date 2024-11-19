@@ -1,0 +1,22 @@
+
+
+class Solution {
+public:
+    int numWaterBottles(int numBottles, int numExchange) {
+        int totalDrank = 0;
+        int emptyBottles = 0;
+
+        while (numBottles > 0) {
+            // Drink all available full bottles
+            totalDrank += numBottles;
+            emptyBottles += numBottles;
+
+            // Exchange empty bottles for full bottles
+            numBottles = emptyBottles / numExchange;
+            emptyBottles %= numExchange; // Remaining empty bottles after exchange
+        }
+
+        return totalDrank;
+    }
+};
+
